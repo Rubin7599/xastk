@@ -1,0 +1,36 @@
+# DRAFT template format (engine planned for Phase 2)
+template: sac_MN4_first_shell
+version: 0.1.0
+description: >
+  Single-atom M-N4 site on N-doped carbon. N and O cannot be distinguished by EXAFS alone, so the
+  template fits a model set and reports model probabilities instead of a single "best" model.
+processing:
+  rbkg: auto
+  kweight: [1, 2, 3]          # multi-k-weight fit reduces N-sigma2 correlation
+  window: hanning
+  dk: 1.0
+  k_range: [3.0, 11.5]
+  r_range: [1.0, 3.0]
+parameters:
+  s02: {from_reference: metal_foil, beamline: same_as_data}   # fixed, never refined on the sample
+  del_e0: {shared: true, bounds: [-10, 10]}
+model_set:
+  MN4:
+    paths:
+      - {label: M-N,  feff: MPc/feff0001.dat, N: {vary: true, bounds: [2, 6]}, sigma2: {bounds: [0.002, 0.02]}}
+      - {label: M-C2, feff: MPc/feff0003.dat, N: {expr: "2*N_MN"}, sigma2: {bounds: [0.002, 0.03]}}
+  MN4_axialO:
+    extends: MN4
+    add:
+      - {label: M-O_ax, feff: MPc_O/feff0002.dat, N: {vary: true, bounds: [0, 2]}, sigma2: {link: M-N}}
+  MN4_cluster:
+    extends: MN4
+    mixture:
+      cluster_fraction: {vary: true, bounds: [0, 0.5]}
+      cluster_paths:
+        - {label: M-M, feff: metal/feff0001.dat}
+required_checks:
+  - model_probabilities: {criteria: [aic, bic, hamilton]}
+  - cluster_detection_limit: {noise_from: estimate_noise, confidence: 0.95, realizations: 200}
+  - sanity: default
+outputs: [result.json, model_table, si_table, wt_figure]

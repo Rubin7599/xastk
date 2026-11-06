@@ -1,0 +1,68 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "xastk"
+dynamic = ["version"]
+description = "Reproducible, statistically validated XANES/EXAFS analysis on top of xraylarch"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+authors = [{ name = "Jhih-Jia Hung (Rubin)" }]
+keywords = ["XAS", "EXAFS", "XANES", "synchrotron", "larch", "MCR-ALS", "wavelet", "Bayesian"]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Chemistry",
+  "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = [
+  "numpy>=2.0",
+  "scipy>=1.11",
+  "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+larch = ["xraylarch>=2025.1"]
+stats = ["xraylarch>=2025.1", "emcee>=3.1"]
+docx = ["python-docx>=1.1"]
+origin = ["originpro>=1.1; platform_system == 'Windows'", "pandas>=2.0"]
+schema = ["jsonschema>=4.0"]
+all = ["xastk[larch,stats,docx,schema]"]
+dev = ["xastk[all]", "pytest>=8", "pytest-cov", "ruff>=0.6"]
+
+[project.scripts]
+xastk = "xastk.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Rubin7599/xastk"
+Documentation = "https://github.com/Rubin7599/xastk/tree/main/docs"
+Issues = "https://github.com/Rubin7599/xastk/issues"
+
+[tool.hatch.version]
+path = "src/xastk/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/xastk"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = [
+  "larch: needs xraylarch installed",
+  "slow: MCMC or other long-running tests",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = ["E501", "B007"]

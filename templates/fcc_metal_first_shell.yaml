@@ -1,0 +1,23 @@
+# DRAFT template format (engine planned for Phase 2)
+template: fcc_metal_first_shell
+version: 0.1.0
+description: First M-M shell of an fcc metal; reference S0^2 from the foil itself.
+processing:
+  rbkg: auto                 # xastk.reduce.rbkg_stability recommendation, scan table stored with the run
+  kweight: [2]
+  window: kaiser
+  dk: 4
+  k_range: [3.0, 16.0]
+  r_range: [1.4, 3.0]
+parameters:
+  s02:   {vary: true, bounds: [0.6, 1.1]}       # foil fit: S0^2 refined, then reused for samples
+  del_e0: {vary: true, bounds: [-10, 10]}
+  sig2:  {vary: true, bounds: [0.0, 0.03]}
+  del_r: {vary: true, bounds: [-0.2, 0.2]}
+  c3:    {vary: optional}                        # keep only if the Hamilton test passes
+paths:
+  - {label: M-M1, feff: feff0001.dat, degen: from_feff, s02: s02, e0: del_e0, sigma2: sig2, deltar: del_r, third: c3}
+required_checks:
+  - hamilton: {compare: [without_c3, with_c3], level: 0.95}
+  - sanity: default
+outputs: [result.json, si_table, wt_figure]

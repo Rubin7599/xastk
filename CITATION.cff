@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use xastk, please cite it as below, together with xraylarch and the method papers for the analyses you use."
+title: "xastk: reproducible, statistically validated XAS analysis on top of xraylarch"
+version: 0.1.0.dev0
+date-released: 2026-11-07
+license: MIT
+repository-code: "https://github.com/Rubin7599/xastk"
+authors:
+  - family-names: Hung
+    given-names: Jhih-Jia
+    alias: Rubin
+keywords:
+  - X-ray absorption spectroscopy
+  - EXAFS
+  - XANES
+  - MCR-ALS
+  - wavelet transform
+  - Bayesian inference
+references:
+  - type: article
+    title: "Larch: An Analysis Package for XAFS and Related Spectroscopies"
+    authors:
+      - family-names: Newville
+        given-names: Matthew
+    journal: "Journal of Physics: Conference Series"
+    volume: 430
+    start: "012007"
+    year: 2013
