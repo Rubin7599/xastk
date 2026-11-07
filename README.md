@@ -84,17 +84,10 @@ See [docs/getting-started.md](docs/getting-started.md) and the runnable scripts 
 <p align="center"><img src="docs/img/mcr_concentrations.png" width="680" alt="MCR concentration profiles"></p>
 <p align="center"><img src="docs/img/wt_cu.png" width="460" alt="Cu foil WT composite"></p>
 
-## 中文簡介
-
-xastk 是建立在 Larch 之上的開源 XAS 分析工具組（MIT 授權），目標是讓 EXAFS／XANES 分析**可重現、有統計依據**：
-Hamilton 檢定與 MCMC 判斷額外殼層或參數是否站得住腳；加入動力學約束的 MCR-ALS 拆解沒有純物質參考的 operando 資料；
-Morlet 小波轉換搭配波峰偵測；R_bkg 穩定性掃描；每次擬合產生一份 `result.json`，直接輸出 SI 表格（CSV／LaTeX／Word）
-與 OriginPro 圖檔包。完整說明見 [技術報告](docs/technical-report.md)。
-
 ## Contributing and AI-assistance disclosure
 
 Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md). The v0.1 scaffold, code
-and documentation were drafted with AI assistance (Claude, Anthropic) and are under maintainer
+and documentation were drafted with AI assistance (Claude, Anthropic, Opus 5.5 Max) and are under maintainer
 review; see the contributing guide for the disclosure policy.
 
 ## Citation
