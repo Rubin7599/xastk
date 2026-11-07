@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/Rubin7599/xastk/actions/workflows/ci.yml/badge.svg)](https://github.com/Rubin7599/xastk/actions/workflows/ci.yml)
 ![license](https://img.shields.io/badge/license-MIT-blue)
-![python](https://img.shields.io/badge/python-3.11%20|%203.12%20|%203.13-blue)
+![python](https://img.shields.io/badge/python-3.11%20|%203.12%20|%203.13%20|%203.14-blue)
 ![status](https://img.shields.io/badge/status-pre--alpha-orange)
 
 **Reproducible, statistically validated XANES/EXAFS analysis on top of [xraylarch](https://github.com/xraypy/xraylarch).**
